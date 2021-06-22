@@ -1,6 +1,6 @@
 #################
 # Maps for health policy and IMR
-# Citation: Webster JL, Paul D, Purtle J, Locke R, Goldstein ND. A Narrative Review of State-level Health Policies and their Association with Perinatal and Infant Outcomes. Manuscript in preparation.
+# Citation: Webster JL, Paul D, Purtle J, Locke R, Goldstein ND. State-level Social and Economic Policies and their Association with Perinatal and Infant Outcomes. Manuscript in preparation.
 # 11/25/20 -- Neal Goldstein
 #################
 
@@ -78,8 +78,12 @@ plot_profiles(lpa)
 
 policy_data$Class = get_data(lpa)$Class
 
-boxplot(policy_data$IMR_2018 ~ policy_data$Class, main="A)", xlab="Latent Policy Profile", ylab="2018 Infant Mortality Rate")
-boxplot((policy_data$Fetal_deaths_2018/policy_data$Births_2018*1000) ~ policy_data$Class, main="B)", xlab="Latent Policy Profile", ylab="2018 Fetal Mortality Rate")
+boxplot(policy_data$IMR_2018 ~ policy_data$Class, main="A)", xlab="Latent Policy Profile", ylab="Infant Mortality Rate per 1,000")
+policy_data$FMR_2014_18 = policy_data$Fetal_deaths_2018/policy_data$Births_2018*1000
+boxplot(policy_data$FMR_2014_18 ~ policy_data$Class, main="B)", xlab="Latent Policy Profile", ylab="Fetal Mortality Rate per 1,000")
+
+#export
+write.csv(policy_data, file="data.csv", na="", row.names=F)
 
 
 ### CHOROPLETH US MAP ###
